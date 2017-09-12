@@ -1,0 +1,6 @@
+framework module Pods_Me_Indica {
+  umbrella header "Pods-Me Indica-umbrella.h"
+
+  export *
+  module * { export * }
+}
