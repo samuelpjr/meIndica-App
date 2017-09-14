@@ -44,11 +44,9 @@ class PodcastDetailsTableViewController: UITableViewController {
     }
     
     func setup(){
-        tableView.estimatedRowHeight = 100
-        tableView.separatorColor = UIColor.white
-        tableView.rowHeight = UITableViewAutomaticDimension
         let backButton = UIBarButtonItem(title: "Voltar", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
-        navigationController?.navigationBar.tintColor = UIColor.red
+        navigationController?.navigationBar.tintColor = UIColor.white
+        navigationController?.navigationBar.barTintColor = UIColor.red
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
         
     }

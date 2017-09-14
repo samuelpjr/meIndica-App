@@ -33,6 +33,7 @@ class SeriesCollectionViewController: UICollectionViewController {
         loadData()
     }
     
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         return seriesData.count
     }

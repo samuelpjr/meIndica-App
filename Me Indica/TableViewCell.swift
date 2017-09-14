@@ -11,7 +11,7 @@ import UIKit
 class TableViewCell: UITableViewCell {
 
     //MARK: - Series
-    @IBOutlet var bannerImg: UIImageView!
+    //@IBOutlet var bannerImg: UIImageView!
     @IBOutlet var lancamento: UILabel!
     @IBOutlet var status: UILabel!
     @IBOutlet var titulo: UILabel!
