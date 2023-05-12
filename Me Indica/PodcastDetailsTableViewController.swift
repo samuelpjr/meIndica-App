@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Parse
 
 class PodcastDetailsTableViewController: UITableViewController {
     
@@ -27,24 +26,15 @@ class PodcastDetailsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:TableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
         
-        let objects : PFObject = podcastData.object(at: podCastIndex) as! PFObject
-        cell.tituloPodcast.text = objects.object(forKey: "title") as? String
-        cell.txtOqueE.text = objects.object(forKey: "sinopseText") as? String
-        
-        if let mainImage = objects.object(forKey: "MainImage") as? PFFile{
-            mainImage.getDataInBackground({ (imgData:Data?, error:Error?) -> Void in
-                if error == nil{
-                    guard let Image : UIImage = UIImage(data: imgData!) else {return}
-                    cell.bannerImgPodcast.image = Image
-                }
-            })
-        }
+        cell.tituloPodcast.text = "Title"
+        cell.txtOqueE.text = "sinopseText"
+        cell.bannerImgPodcast.image = UIImage(systemName: "photo.artframe")
     
         return cell
     }
     
     func setup(){
-        let backButton = UIBarButtonItem(title: "Voltar", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
+        let backButton = UIBarButtonItem(title: "Voltar", style: UIBarButtonItem.Style.plain, target: nil, action: nil)
         navigationController?.navigationBar.tintColor = UIColor.white
         navigationController?.navigationBar.barTintColor = UIColor.red
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton

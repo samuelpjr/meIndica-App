@@ -6,6 +6,5 @@ target 'Me Indica' do
   use_frameworks!
 
   # Pods for Me Indica
-    pod 'Parse'
-    pod 'TwitterKit'
+    
 end

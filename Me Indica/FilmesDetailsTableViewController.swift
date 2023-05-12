@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Parse
 
 class FilmesDetailsTableViewController: UITableViewController {
     
@@ -26,23 +25,16 @@ class FilmesDetailsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:TableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
         
-        let objects = filmesData.object(at: filmesIndex) as! PFObject
-        cell.tituloFilmes.text = objects.object(forKey: "title") as? String
-        cell.txtSinopseFilmes.text = objects.object(forKey: "sinopseText") as? String
         
-        if let mainImage = objects.object(forKey: "MainImage") as? PFFile {
-            mainImage.getDataInBackground({ (imgData:Data?, error:Error?) -> Void in
-                if error == nil{
-                    guard let Image = UIImage(data: imgData!) else {return}
-                    cell.bannerImageFilmes.image = Image
-                }
-            })
-        }
+        cell.tituloFilmes.text = "Title"
+        cell.txtSinopseFilmes.text = "sinopseText"
+        cell.bannerImageFilmes.image = UIImage(systemName: "photo.artframe")
+           
         return cell
     }
     
     func setup(){
-        let backButton = UIBarButtonItem(title: "Voltar", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
+        let backButton = UIBarButtonItem(title: "Voltar", style: UIBarButtonItem.Style.plain, target: nil, action: nil)
         navigationController?.navigationBar.tintColor = UIColor.white
         navigationController?.navigationBar.barTintColor = UIColor.red
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton

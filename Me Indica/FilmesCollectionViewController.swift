@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Parse
+
 
 class FilmesCollectionViewController: UICollectionViewController {
     
@@ -29,25 +29,17 @@ class FilmesCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         showActivitIndicator()
-        loadData()
+//        loadData()
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        return filmesData.count
+        return 12
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         let cellId = "CollectionViewCellFilme"
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CollectionViewCell
-        let objects = filmesData.object(at: (indexPath as NSIndexPath).row) as! PFObject
-        if let thumbCellImage  = objects.object(forKey: "thumbImgCell") as? PFFile {
-            thumbCellImage.getDataInBackground({ (imgData:Data?, error:Error?) -> Void in
-                if error == nil{
-                    guard let Image = UIImage(data: imgData!) else {return}
-                    cell.thumbImgFilme.image = Image
-                }
-            })
-        }
+        cell.thumbImgFilme.image = UIImage(systemName: "photo.stack.fill")
         
         activityIndicator.stopAnimating()
         return cell
@@ -70,40 +62,40 @@ class FilmesCollectionViewController: UICollectionViewController {
         activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        activityIndicator.style = UIActivityIndicatorView.Style.medium
         view.addSubview(activityIndicator)
         
         activityIndicator.startAnimating()
     }
     
     //MARK: - Load
-    func loadData(){
-        filmesData.removeAllObjects()
-        
-        let findfilmesData = PFQuery(className: "Filmes")
-        findfilmesData.cachePolicy = .cacheElseNetwork
-        findfilmesData.cachePolicy = .networkElseCache
-        
-        findfilmesData.findObjectsInBackground { (objects, error) in
-            if error == nil{
-                if objects != nil {
-                    for object in objects!{
-                        let filmes : PFObject = object
-                        filmesData.add(filmes)
-                    }
-                } else {
-                    print(error ?? "Erro filme parse")
-                }
-                
-                let myarray : NSArray = filmesData.reverseObjectEnumerator().allObjects as NSArray
-                filmesData = NSMutableArray(array : myarray)
-                self.collectionView?.reloadData()
-            } else {
-                print(error ?? "Erro filme parse")
-            }
-        }
-        
-    }
+//    func loadData(){
+//        filmesData.removeAllObjects()
+//
+//        let findfilmesData = PFQuery(className: "Filmes")
+//        findfilmesData.cachePolicy = .cacheElseNetwork
+//        findfilmesData.cachePolicy = .networkElseCache
+//
+//        findfilmesData.findObjectsInBackground { (objects, error) in
+//            if error == nil{
+//                if objects != nil {
+//                    for object in objects!{
+//                        let filmes : PFObject = object
+//                        filmesData.add(filmes)
+//                    }
+//                } else {
+//                    print(error ?? "Erro filme parse")
+//                }
+//
+//                let myarray : NSArray = filmesData.reverseObjectEnumerator().allObjects as NSArray
+//                filmesData = NSMutableArray(array : myarray)
+//                self.collectionView?.reloadData()
+//            } else {
+//                print(error ?? "Erro filme parse")
+//            }
+//        }
+//
+//    }
 }
 
 extension FilmesCollectionViewController : UICollectionViewDelegateFlowLayout {

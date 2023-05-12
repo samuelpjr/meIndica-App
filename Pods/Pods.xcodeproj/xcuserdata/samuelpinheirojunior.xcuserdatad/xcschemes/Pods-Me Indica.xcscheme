@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "574816DB1C42D657001760B6"
-               BuildableName = "Me Indica.app"
-               BlueprintName = "Me Indica"
-               ReferencedContainer = "container:Me Indica.xcodeproj">
+               BlueprintIdentifier = "AF6E8884978436A9A906783AE21A7CB2"
+               BuildableName = "Pods_Me_Indica.framework"
+               BlueprintName = "Pods-Me Indica"
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -27,15 +27,6 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "574816DB1C42D657001760B6"
-            BuildableName = "Me Indica.app"
-            BlueprintName = "Me Indica"
-            ReferencedContainer = "container:Me Indica.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <Testables>
       </Testables>
    </TestAction>
@@ -49,16 +40,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "574816DB1C42D657001760B6"
-            BuildableName = "Me Indica.app"
-            BlueprintName = "Me Indica"
-            ReferencedContainer = "container:Me Indica.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -66,16 +47,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "574816DB1C42D657001760B6"
-            BuildableName = "Me Indica.app"
-            BlueprintName = "Me Indica"
-            ReferencedContainer = "container:Me Indica.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

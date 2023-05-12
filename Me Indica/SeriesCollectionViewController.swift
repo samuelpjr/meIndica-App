@@ -7,9 +7,6 @@
 //
 
 import UIKit
-import Parse
-
-
 
 class SeriesCollectionViewController: UICollectionViewController {
     
@@ -30,26 +27,21 @@ class SeriesCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         showActivitIndicator()
-        loadData()
+//        loadData()
     }
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        return seriesData.count
+        return 12
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         let cellId = "CollectionViewCell"
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CollectionViewCell
-        let objects = seriesData.object(at: (indexPath as NSIndexPath).row) as! PFObject
-        if let thumbCellImage = objects.object(forKey: "thumbImgCell") as? PFFile {
-            thumbCellImage.getDataInBackground({ (imgData:Data?, error:Error?) -> Void in
-                if error == nil{
-                    guard let Image = UIImage(data: imgData!) else {return}
-                    cell.thumbImgSeries.image = Image
-                }
-            })
-        }
+        
+        cell.thumbImgSeries.image = UIImage(systemName: "photo.stack.fill")
+            
+        
         
         activityIndicator.stopAnimating()
         return cell
@@ -71,39 +63,39 @@ class SeriesCollectionViewController: UICollectionViewController {
         activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        activityIndicator.style = UIActivityIndicatorView.Style.medium
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
     }
 
     //MARK: - Load
-    func loadData(){
-        seriesData.removeAllObjects()
-        
-        let findSeriesData = PFQuery(className: "Series")
-        findSeriesData.cachePolicy = .cacheElseNetwork
-        findSeriesData.cachePolicy = .networkElseCache
-        
-        findSeriesData.findObjectsInBackground { (objects, error) in
-            if error == nil{
-                if objects != nil {
-                    for object in objects!{
-                        let series : PFObject = object
-                        seriesData.add(series)
-                    }
-                } else {
-                    print(error ?? "Erro series parse")
-                }
-                
-                let myarray : NSArray = seriesData.reverseObjectEnumerator().allObjects as NSArray
-                seriesData = NSMutableArray(array : myarray)
-                self.collectionView?.reloadData()
-            } else {
-             print(error ?? "Erro series parse")
-            }
-        }
-        
-    }
+//    func loadData(){
+//        seriesData.removeAllObjects()
+//
+//        let findSeriesData = PFQuery(className: "Series")
+//        findSeriesData.cachePolicy = .cacheElseNetwork
+//        findSeriesData.cachePolicy = .networkElseCache
+//
+//        findSeriesData.findObjectsInBackground { (objects, error) in
+//            if error == nil{
+//                if objects != nil {
+//                    for object in objects!{
+//                        let series : PFObject = object
+//                        seriesData.add(series)
+//                    }
+//                } else {
+//                    print(error ?? "Erro series parse")
+//                }
+//
+//                let myarray : NSArray = seriesData.reverseObjectEnumerator().allObjects as NSArray
+//                seriesData = NSMutableArray(array : myarray)
+//                self.collectionView?.reloadData()
+//            } else {
+//             print(error ?? "Erro series parse")
+//            }
+//        }
+//
+//    }
 }
 
 

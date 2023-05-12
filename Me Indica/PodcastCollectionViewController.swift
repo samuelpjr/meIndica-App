@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Parse
 
 class PodcastCollectionViewController: UICollectionViewController, UIGestureRecognizerDelegate {
     
@@ -26,7 +25,7 @@ class PodcastCollectionViewController: UICollectionViewController, UIGestureReco
     override func viewDidLoad() {
         super.viewDidLoad()
         showActivitIndicator()
-        loadData()
+//        loadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -42,21 +41,13 @@ class PodcastCollectionViewController: UICollectionViewController, UIGestureReco
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        return podcastData.count
+        return 12
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         let cellId = "CollectionViewCellPod"
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CollectionViewCell
-        let objects = podcastData.object(at: (indexPath as NSIndexPath).row) as! PFObject
-        if let thumbCellImage = objects.object(forKey: "thumbImgCell") as? PFFile {
-            thumbCellImage.getDataInBackground({ (imgData:Data?, error:Error?) -> Void in
-                if error == nil{
-                    guard let Image = UIImage(data: imgData!) else {return}
-                    cell.thumbImgPodcast.image = Image
-                }
-            })
-        }
+        cell.thumbImgPodcast.image = UIImage(systemName: "photo.stack.fill")
         
         activityIndicator.stopAnimating()
         return cell
@@ -67,40 +58,40 @@ class PodcastCollectionViewController: UICollectionViewController, UIGestureReco
         activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        activityIndicator.style = UIActivityIndicatorView.Style.medium
         view.addSubview(activityIndicator)
         
         activityIndicator.startAnimating()
     }
     
     //MARK: - Load
-    private func loadData(){
-        podcastData.removeAllObjects()
-        
-        let findPodcatsData = PFQuery(className: "Podcasts")
-        findPodcatsData.cachePolicy = .cacheElseNetwork
-        findPodcatsData.cachePolicy = .networkElseCache
-        
-        findPodcatsData.findObjectsInBackground { (objects, error) in
-            if error == nil{
-                if objects != nil {
-                    for object in objects!{
-                        let podcast : PFObject = object
-                        podcastData.add(podcast)
-                    }
-                } else {
-                    print(error ?? "Erro podcast parse")
-                }
-                
-                let myarray : NSArray = podcastData.reverseObjectEnumerator().allObjects as NSArray
-                podcastData = NSMutableArray(array : myarray)
-                self.collectionView?.reloadData()
-            } else {
-                print(error ?? "Erro podcast parse")
-            }
-        }
-        
-    }
+//    private func loadData(){
+//        podcastData.removeAllObjects()
+//        
+//        let findPodcatsData = PFQuery(className: "Podcasts")
+//        findPodcatsData.cachePolicy = .cacheElseNetwork
+//        findPodcatsData.cachePolicy = .networkElseCache
+//        
+//        findPodcatsData.findObjectsInBackground { (objects, error) in
+//            if error == nil{
+//                if objects != nil {
+//                    for object in objects!{
+//                        let podcast : PFObject = object
+//                        podcastData.add(podcast)
+//                    }
+//                } else {
+//                    print(error ?? "Erro podcast parse")
+//                }
+//                
+//                let myarray : NSArray = podcastData.reverseObjectEnumerator().allObjects as NSArray
+//                podcastData = NSMutableArray(array : myarray)
+//                self.collectionView?.reloadData()
+//            } else {
+//                print(error ?? "Erro podcast parse")
+//            }
+//        }
+//        
+//    }
 }
 
 extension PodcastCollectionViewController : UICollectionViewDelegateFlowLayout {

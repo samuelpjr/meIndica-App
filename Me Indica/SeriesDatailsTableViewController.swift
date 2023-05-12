@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Parse
 
 class SeriesDatailsTableViewController: UIViewController {
     
@@ -31,9 +30,9 @@ class SeriesDatailsTableViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueTwitter"{
             
-            let seriesDetailsPassData = segue.destination as! TwitterViewController
-            let objects = seriesData.object(at: seriesIndex) as! PFObject
-            seriesDetailsPassData.hashtagTwitter = (objects.object(forKey: "hashtag") as? String)!
+//            let seriesDetailsPassData = segue.destination as! TwitterViewController
+//            let objects = seriesData.object(at: seriesIndex) as! PFObject
+//            seriesDetailsPassData.hashtagTwitter = (objects.object(forKey: "hashtag") as? String)!
         }
         
     }
@@ -74,7 +73,7 @@ class SeriesDatailsTableViewController: UIViewController {
 
     // MARK: - Private methods
     func setup(){
-        let backButton = UIBarButtonItem(title: "Voltar", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
+        let backButton = UIBarButtonItem(title: "Voltar", style: UIBarButtonItem.Style.plain, target: nil, action: nil)
         navigationController?.navigationBar.tintColor = UIColor.white
         navigationController?.navigationBar.barTintColor = UIColor.red
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
@@ -96,23 +95,17 @@ extension SeriesDatailsTableViewController: UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:TableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
         
-        let objects : PFObject = seriesData.object(at: seriesIndex) as! PFObject
-        tableView.separatorColor = UIColor.white
-        cell.titulo.text = objects.object(forKey: "title") as? String
-        cell.lancamento.text = objects.object(forKey: "lancamento") as? String
-        cell.status.text = objects.object(forKey: "status") as? String
-        cell.txtSinopse.text = objects.object(forKey: "sinopseText") as? String
         
-        if let mainImage = objects.object(forKey: "MainImage") as? PFFile {
-            mainImage.getDataInBackground({ (imgData:Data?, error:Error?) -> Void in
-                if error == nil{
-                    guard let image = UIImage(data: imgData!) else {return}
-                    self.bannerImage.image = image
-                    self.imageMain = self.bannerImage
-                    print("A - \(self.imageMain.frame.height)")
-                }
-            })
-        }
+        tableView.separatorColor = UIColor.white
+        cell.titulo.text = "title"
+        cell.lancamento.text =  "lancamento"
+        cell.status.text =  "status"
+        cell.txtSinopse.text =  "sinopseText"
+        
+        
+        self.bannerImage.image = UIImage(systemName: "photo.artframe")
+        self.imageMain = self.bannerImage
+        
         
         return cell
     }
